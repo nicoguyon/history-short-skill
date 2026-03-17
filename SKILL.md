@@ -203,7 +203,7 @@ L'utilisateur n'apparaît jamais. Le personnage interagit avec des gens de son �
 
 | # | Image | Durée | Voix | Contenu |
 |---|-------|-------|------|---------|
-| 1 | **Personnage dans son contexte** (plan large, décor d'époque, passants) | 8-10s | **Narrateur** (voix utilisateur, 3ème pers.) | Introduction : qui, quand, où, pourquoi c'est fou |
+| 1 | **Personnage dans son contexte** (plan large, décor d'époque, passants) | **7-8s MAX** | **Narrateur** (voix utilisateur, 3ème pers.) | Introduction COURTE : qui, quand, où — hook immédiat |
 | 2 | **Personnage en action** (gros plan, expression intense) | 5-7s | **Personnage** (voix adaptée, 1ère pers.) | **Citation forte #1** — phrase percutante |
 | 3 | **Personnage avec d'autres gens** (élèves, collègues, public) | 8-10s | **Narrateur** (3ème pers.) | Le moment clé, l'invention, la découverte |
 | 4 | **Scène de résultat** (foule, impact visuel, B-roll) | 8-10s | **Narrateur** (3ème pers.) | L'impact, les chiffres, le lien avec aujourd'hui |
