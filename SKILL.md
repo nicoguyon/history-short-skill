@@ -1,18 +1,40 @@
 ---
 name: history-short
-description: "Génère un YouTube Short didactique où l'utilisateur incarne un personnage historique — pipeline complet : recherche image, script, Gemini images, ElevenLabs voix, fal.ai avatar, Kling 3.0 animation, Suno musique, FFmpeg montage"
+description: "Génère un YouTube Short didactique sur un personnage historique — pipeline complet : recherche historique, script, Gemini images du personnage, ElevenLabs voix off, Kling 3.0 animation, Suno musique, FFmpeg montage"
 ---
 
 # History Short Generator
 
-Génère un YouTube Short (9:16, 45-60s) où l'utilisateur incarne un personnage historique qui raconte son histoire à la première personne. Style immersif et pédagogique.
+Génère un YouTube Short (9:16, 45-60s) sur un personnage historique. Le personnage apparaît dans TOUTES les scènes — l'utilisateur ne fournit que sa VOIX en narration. Style documentaire immersif et pédagogique.
+
+## Concept clé
+
+- **Le personnage historique** est le héros visuel de la vidéo (images IA)
+- **L'utilisateur n'apparaît JAMAIS** dans les images
+- **2 voix distinctes** :
+  - **Voix de l'utilisateur** (clone ElevenLabs) → narration 3ème personne (documentaire)
+  - **Voix du personnage** (voix adaptée au genre/personnage) → citations directes à la 1ère personne
+- Les scènes montrent le personnage **dans son contexte** : interagissant avec des élèves, collègues, passants, foule
+- **Tout en Kling 3.0 + voix off** — pas d'avatar lip-sync, pas besoin de fal.ai
+
+### Choix des voix ElevenLabs
+
+| Rôle | Si personnage femme | Si personnage homme |
+|------|--------------------|--------------------|
+| Narrateur (3ème pers.) | Voix clone utilisateur | Voix clone utilisateur |
+| Personnage (citations) | Voix féminine ElevenLabs | Voix masculine ElevenLabs |
+
+**Voix féminines recommandées :** chercher dans la bibliothèque ElevenLabs une voix française, posée, charismatique.
+**Voix masculines recommandées :** idem, voix grave et confiante.
+
+Pour lister les voix dispo : `GET /v1/voices` avec le header `xi-api-key`.
 
 ## Invocation
 
 ```
-/history-short "Maria Montessori" --photo ~/ma_photo.jpg
-/history-short "Nikola Tesla" --photo ~/ma_photo.jpg --scenes 4
-/history-short "Marie Curie" --photo ~/ma_photo.jpg --voix daniel --musique "dramatic orchestral"
+/history-short "Maria Montessori"
+/history-short "Nikola Tesla" --scenes 5
+/history-short "Marie Curie" --voix daniel --musique "dramatic orchestral"
 ```
 
 ### Arguments
@@ -20,8 +42,7 @@ Génère un YouTube Short (9:16, 45-60s) où l'utilisateur incarne un personnage
 | Argument | Requis | Description |
 |----------|--------|-------------|
 | `"Personnage"` | OUI | Nom du personnage historique |
-| `--photo` | OUI | Chemin vers la photo de référence de l'utilisateur (visage net, face caméra idéal) |
-| `--scenes` | NON | Nombre de scènes (défaut: 4) |
+| `--scenes` | NON | Nombre de scènes (défaut: 5) |
 | `--voix` | NON | Voix ElevenLabs : ID ou nom (défaut: demander à l'utilisateur) |
 | `--musique` | NON | Style de musique Suno (défaut: adapté à l'époque du personnage) |
 | `--ratio` | NON | Format vidéo (défaut: `9:16`) |
@@ -175,49 +196,45 @@ Personnage historique + Photo utilisateur
 
 ## Structure des scènes — 2 styles
 
-### Style A : Narration 3ème personne + citations directes (RECOMMANDÉ)
+### Structure des scènes (5 scènes par défaut)
 
-La narration principale est en 3ème personne (documentaire), ponctuée de 2 courtes scènes
-où le personnage PARLE DIRECTEMENT face caméra (avatar lip-sync) pour des propos forts/citations.
+**IMPORTANT : Le personnage historique est TOUJOURS le personnage principal des images.**
+L'utilisateur n'apparaît jamais. Le personnage interagit avec des gens de son époque.
 
-| # | Type | Durée | Voix | Contenu | Cadrage |
-|---|------|-------|------|---------|---------|
-| 1 | **Kling + VO** | 8-10s | 3ème pers. | Introduction du personnage et contexte | Plan large, décor d'époque |
-| 2 | **Avatar** | 5-7s | **1ère pers.** | **Citation forte #1** — phrase percutante | Face caméra, plan moyen |
-| 3 | **Kling + VO** | 8-10s | 3ème pers. | Le moment clé / la découverte | Action, plan moyen-large |
-| 4 | **Kling + VO** | 8-10s | 3ème pers. | Anecdote ou B-roll | Plan d'action ou B-roll |
-| 5 | **Avatar** | 5-7s | **1ère pers.** | **Citation forte #2** — morale/chute | Gros plan, regard intense |
+| # | Image | Durée | Voix | Contenu |
+|---|-------|-------|------|---------|
+| 1 | **Personnage dans son contexte** (plan large, décor d'époque, passants) | 8-10s | **Narrateur** (voix utilisateur, 3ème pers.) | Introduction : qui, quand, où, pourquoi c'est fou |
+| 2 | **Personnage en action** (gros plan, expression intense) | 5-7s | **Personnage** (voix adaptée, 1ère pers.) | **Citation forte #1** — phrase percutante |
+| 3 | **Personnage avec d'autres gens** (élèves, collègues, public) | 8-10s | **Narrateur** (3ème pers.) | Le moment clé, l'invention, la découverte |
+| 4 | **Scène de résultat** (foule, impact visuel, B-roll) | 8-10s | **Narrateur** (3ème pers.) | L'impact, les chiffres, le lien avec aujourd'hui |
+| 5 | **Gros plan personnage** (regard intense, lumière dramatique) | 5-7s | **Personnage** (1ère pers.) | **Citation forte #2** — morale/chute universelle |
 
 **Total : 45-55 secondes**
 
-**Pourquoi ce style fonctionne mieux :**
-- La narration 3ème personne donne un ton documentaire crédible
-- Les 2 citations directes (avatar) créent un contraste émotionnel fort
-- Les scènes avatar courtes (5-7s) = lip-sync parfait (pas de dérive)
-- Le spectateur a l'impression que le personnage historique "prend la parole"
+### 2 voix distinctes
 
-**Règle pour les citations directes :**
-- 1-2 phrases MAX par citation (5-7 secondes)
-- Propos FORT, mémorable, quotable
-- Ton affirmatif, pas hésitant
-- Exemples : "L'enfant n'est pas un vase qu'on remplit, c'est une source qu'on laisse jaillir."
+| Scènes | Voix | Style |
+|--------|------|-------|
+| 1, 3, 4 | **Clone de l'utilisateur** | Narration documentaire, 3ème personne, factuel et captivant |
+| 2, 5 | **Voix du personnage** (féminine/masculine selon le personnage) | Citation directe, 1ère personne, intense et mémorable |
 
-### Style B : Narration 1ère personne intégrale (ancien style)
+### Ce que montrent les images
 
-Le personnage raconte toute son histoire à la 1ère personne.
+- **Le personnage est VIVANT** : pas un portrait figé, mais quelqu'un en mouvement, en interaction
+- **Des gens autour** : élèves, assistants, passants, foule — le personnage n'est pas seul
+- **Des objets d'époque** : outils, inventions, matériel, véhicules
+- **Des lieux authentiques** : rues, bâtiments, intérieurs d'époque
+- **Palette cohérente** : même tons de couleur sur toutes les scènes
 
-| # | Type | Durée | Contenu | Cadrage |
-|---|------|-------|---------|---------|
-| 1 | **Avatar** | 7-10s | Introduction : "Je m'appelle X..." | Face caméra, plan moyen |
-| 2 | **Kling + VO** | 8-10s | L'invention / le contexte | Action, plan moyen-large |
-| 3 | **Kling + VO** | 8-10s | Le moment clé / la découverte | Plan d'action ou B-roll |
-| 4 | **Avatar** | 10-15s | La révélation / morale | Gros plan face caméra, intense |
+### Règles pour les citations directes (scènes 2 et 5)
 
-**Total : 45-60 secondes**
-
-### Variante : ajouter un B-roll
-
-Dans les deux styles, on peut ajouter une scène B-roll (figurants, objets, lieux) sans le visage de l'utilisateur pour enrichir visuellement.
+- **1-2 phrases MAX** : 5-7 secondes de parole
+- **Propos FORT, mémorable, quotable** — une phrase qu'on a envie de partager
+- **Ton affirmatif** : conviction, passion, certitude
+- **Exemples** :
+  - "L'enfant n'est pas un vase qu'on remplit. C'est une source qu'on laisse jaillir."
+  - "J'ai vu des enfants de 4 ans lire et écrire. Personne ne leur avait appris."
+  - "Le courant alternatif éclairera le monde entier."
 
 ## APIs — Détails techniques
 
