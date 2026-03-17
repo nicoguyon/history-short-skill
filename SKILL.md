@@ -173,7 +173,38 @@ Personnage historique + Photo utilisateur
     |      → OUVRIR la vidéo finale
 ```
 
-## Structure des scènes (modèle par défaut — 4 scènes)
+## Structure des scènes — 2 styles
+
+### Style A : Narration 3ème personne + citations directes (RECOMMANDÉ)
+
+La narration principale est en 3ème personne (documentaire), ponctuée de 2 courtes scènes
+où le personnage PARLE DIRECTEMENT face caméra (avatar lip-sync) pour des propos forts/citations.
+
+| # | Type | Durée | Voix | Contenu | Cadrage |
+|---|------|-------|------|---------|---------|
+| 1 | **Kling + VO** | 8-10s | 3ème pers. | Introduction du personnage et contexte | Plan large, décor d'époque |
+| 2 | **Avatar** | 5-7s | **1ère pers.** | **Citation forte #1** — phrase percutante | Face caméra, plan moyen |
+| 3 | **Kling + VO** | 8-10s | 3ème pers. | Le moment clé / la découverte | Action, plan moyen-large |
+| 4 | **Kling + VO** | 8-10s | 3ème pers. | Anecdote ou B-roll | Plan d'action ou B-roll |
+| 5 | **Avatar** | 5-7s | **1ère pers.** | **Citation forte #2** — morale/chute | Gros plan, regard intense |
+
+**Total : 45-55 secondes**
+
+**Pourquoi ce style fonctionne mieux :**
+- La narration 3ème personne donne un ton documentaire crédible
+- Les 2 citations directes (avatar) créent un contraste émotionnel fort
+- Les scènes avatar courtes (5-7s) = lip-sync parfait (pas de dérive)
+- Le spectateur a l'impression que le personnage historique "prend la parole"
+
+**Règle pour les citations directes :**
+- 1-2 phrases MAX par citation (5-7 secondes)
+- Propos FORT, mémorable, quotable
+- Ton affirmatif, pas hésitant
+- Exemples : "L'enfant n'est pas un vase qu'on remplit, c'est une source qu'on laisse jaillir."
+
+### Style B : Narration 1ère personne intégrale (ancien style)
+
+Le personnage raconte toute son histoire à la 1ère personne.
 
 | # | Type | Durée | Contenu | Cadrage |
 |---|------|-------|---------|---------|
@@ -184,9 +215,9 @@ Personnage historique + Photo utilisateur
 
 **Total : 45-60 secondes**
 
-### Variante 5 scènes (avec B-roll)
+### Variante : ajouter un B-roll
 
-Ajouter une scène B-roll entre les scènes 2 et 3 (figurants, objets, lieux) pour enrichir visuellement. Pas de visage de l'utilisateur dans le B-roll.
+Dans les deux styles, on peut ajouter une scène B-roll (figurants, objets, lieux) sans le visage de l'utilisateur pour enrichir visuellement.
 
 ## APIs — Détails techniques
 
@@ -468,21 +499,38 @@ Chaque vidéo DOIT contenir **au moins 3 faits concrets** que le spectateur ne c
 - Un lien inattendu avec le présent : "Les fondateurs de Google, Amazon et Wikipedia sont tous passés par Montessori"
 - Une anecdote méconnue : "Le premier jour, les enfants ont rangé le matériel tout seuls — personne ne leur avait demandé"
 
-### Structure narrative
+### Structure narrative (Style A — recommandé)
 
-1. **Hook immédiat** (scene 1) : "Je m'appelle X..." + fait marquant surprenant
-2. **Le contexte** (scene 2) : L'invention/découverte expliquée simplement — ÉDUQUER
-3. **Le moment clé** (scene 3) : L'anecdote méconnue qui rend l'histoire vivante — SURPRENDRE
-4. **La chute** (scene 4) : Lien avec le monde d'aujourd'hui + morale universelle — INSPIRER
+1. **Contexte** (scene 1, VO 3ème pers.) : Présenter le personnage, l'époque, le problème — SITUER
+2. **Citation #1** (scene 2, Avatar 1ère pers.) : Le personnage prend la parole, phrase forte — FRAPPER
+3. **Le moment clé** (scene 3, VO 3ème pers.) : L'invention/découverte expliquée — ÉDUQUER
+4. **Anecdote/B-roll** (scene 4, VO 3ème pers.) : Le fait surprenant, le détail méconnu — SURPRENDRE
+5. **Citation #2** (scene 5, Avatar 1ère pers.) : Morale, lien avec aujourd'hui — INSPIRER
 
-### Règles d'écriture
+### Règles d'écriture — Narration 3ème personne
 
-- **Première personne** : "Je m'appelle...", "Ma sœur...", "J'ai inventé..."
+- **Ton documentaire** : "En 1907, dans le pire quartier de Rome, une femme a fait quelque chose d'impensable."
 - **Anecdotes concrètes** : détails visuels, chiffres précis, dates, noms de lieux
 - **Vulgarisation** : expliquer les concepts complexes comme si on parlait à un ami
-- **Humour léger** : une touche d'humour rend le personnage attachant
-- **Personnage frère/sœur/ami** : Si le personnage est une femme et l'utilisateur un homme (ou vice-versa), incarner un proche (frère, assistant, collaborateur)
+- **Rythme** : phrases courtes et percutantes, pas de longs paragraphes
 - **PAS de jargon académique** : parler comme un humain, pas comme un manuel d'histoire
+
+### Règles d'écriture — Citations directes (1ère personne, avatar)
+
+- **1-2 phrases MAX** : 5-7 secondes de parole
+- **Ton affirmatif** : conviction, passion, certitude
+- **Propos mémorable** : une phrase qu'on a envie de citer
+- **Tutoyer le spectateur** si ça sert l'émotion : "Regardez ces enfants..."
+- **Exemples de bonnes citations** :
+  - "L'enfant n'est pas un vase qu'on remplit. C'est une source qu'on laisse jaillir."
+  - "J'ai vu des enfants de 4 ans lire, écrire et compter. Et personne ne leur avait appris."
+  - "Le courant alternatif éclairera le monde. Et ils riront de ceux qui en doutaient."
+
+### Personnage homme/femme
+
+- Si le personnage est une femme et l'utilisateur un homme (ou vice-versa) :
+  - **Style A (recommandé)** : L'utilisateur est un narrateur/documentariste d'époque. Les citations sont celles du VRAI personnage, pas du narrateur.
+  - **Style B** : Incarner un proche (frère, assistant, collaborateur)
 
 ## Coût estimé par vidéo
 
